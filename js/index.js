@@ -92,8 +92,8 @@ const worker11 = new BottomLevelWorker("Ivan",
   36,
   "Developer",
   1220, 10);
-// console.log(worker11);
-// console.log(worker11.getLoyaltyLevel());
+console.log(worker11);
+console.log(worker11.getLoyaltyLevel());
 
 // ES6
 
