@@ -40,14 +40,10 @@ Worker.prototype.getSalary = function () {
 };
 
 const TopLevelWorker = function (
-  name,
-  surname,
-  age,
-  position,
-  salary,
+  args,
   hierarchyLevel
 ) {
-  Worker.apply(this, [name, surname, age, position, salary]);
+  Worker.apply(this, args);
   this.hierarchyLevel = hierarchyLevel;
 };
 
@@ -58,25 +54,25 @@ TopLevelWorker.prototype.getSalary = function() {
 };
 
 const worker1 = new TopLevelWorker(
-  "Ашот",
+  ["Ашот",
   "Осипян",
   27,
   "Developer",
-  100,
+  100],
   HIERARCHY_LEVEL.BOTTOM
 );
 
-// console.log(worker1.getSalary());
+console.log(worker1.getSalary());
 
-// console.log(worker1);
+ console.log(worker1);
 
 const LOYALTY_LEVEL = {
   HIGH: "high",
   LOW: "low"
 };
 
-const BottomLevelWorker = function (name, surname, age, position, salary, experience) {
-  Worker.apply(this, [name, surname, age, position, salary]);
+const BottomLevelWorker = function (args, experience) {
+  Worker.apply(this, args);
   this.experience = experience;
 };
 
@@ -87,78 +83,78 @@ BottomLevelWorker.prototype.getLoyaltyLevel = function () {
   return `У ${this.name} уровень преданности ${this.experience > 100 ? LOYALTY_LEVEL.HIGH : LOYALTY_LEVEL.LOW}.`
 };
 
-const worker11 = new BottomLevelWorker("Ivan",
-  "Petrov",
+const worker11 = new BottomLevelWorker(["Ivan",
+  "Ivanuch",
   36,
   "Developer",
-  1220, 10);
+  1220], 10);
 console.log(worker11);
-console.log(worker11.getLoyaltyLevel());
+// console.log(worker11.getLoyaltyLevel());
 
 // ES6
 
-// class Worker1 {
-//   #salary;
+class Worker1 {
+  #salary;
 
-//   constructor(name, surname, age, position, salary) {
-//     this.name = name;
-//     this.surname = surname;
-//     this.age = age;
-//     this.position = position;
-//     this.#salary = salary;
-//   }
+  constructor(name, surname, age, position, salary) {
+    this.name = name;
+    this.surname = surname;
+    this.age = age;
+    this.position = position;
+    this.#salary = salary;
+  }
 
-//   get salary() {
-//     if (this.#salary >= 500 && this.#salary < 5000) {
-//       return this.#salary;
-//     } else {
-//       return `Текущая зарплата указана неверно`;
-//     }
-//   }
+  get salary() {
+    if (this.#salary >= 500 && this.#salary < 5000) {
+      return this.#salary;
+    } else {
+      return `Текущая зарплата указана неверно`;
+    }
+  }
   
-//   set salary(value) {
-//     if (value >= 500 && value < 5000) {
-//       this.#salary = value;
-//     }
-//   }
+  set salary(value) {
+    if (value >= 500 && value < 5000) {
+      this.#salary = value;
+    }
+  }
 
-//   static HIERARCHY_LEVEL() {
-//   return { TOP: "top",
-//     BOTTOM: 'bottom'}
-//   };
+  static HIERARCHY_LEVEL() {
+  return { TOP: "top",
+    BOTTOM: 'bottom'}
+  };
  
-// }
+}
 
-// class TopLevelWorker1 extends Worker1 {
-//   constructor(name, surname, age, position, salary, hierarchyLevel) {
-//     super(name, surname, age, position, salary);
-//     this.hierarchyLevel = hierarchyLevel;
-//   }
+class TopLevelWorker1 extends Worker1 {
+  constructor(name, surname, age, position, salary, hierarchyLevel) {
+    super(name, surname, age, position, salary);
+    this.hierarchyLevel = hierarchyLevel;
+  }
 
-//   setHierarchyLevel(years) {
-//     if (years < 1) {
-//       return `Вы проработали меньше 1 года`;
-//     }
+  setHierarchyLevel(years) {
+    if (years < 1) {
+      return `Вы проработали меньше 1 года`;
+    }
      
-//     if (years > 1 && years < 3) {
-//       this.hierarchyLevel = HIERARCHY_LEVEL.BOTTOM;
-//     }
-//   }
-// }
+    if (years > 1 && years < 3) {
+      this.hierarchyLevel = HIERARCHY_LEVEL.BOTTOM;
+    }
+  }
+}
 
-// const worker2 = new TopLevelWorker1(
-//   "Ашот",
-//   "Осипян",
-//   27,
-//   "Developer",
-//   90,
-//   HIERARCHY_LEVEL.BOTTOM
-// );
+const worker2 = new TopLevelWorker1(
+  "Ашот",
+  "Осипян",
+  27,
+  "Developer",
+  90,
+  HIERARCHY_LEVEL.BOTTOM
+);
 
-// //  console.log(worker2.getSalary());
-//  console.log(Worker1.HIERARCHY_LEVEL());
-// console.log(worker2.salary);
-// worker2.salary = 4999;
-// console.log(worker2.salary);
+//  console.log(worker2.getSalary());
+ console.log(Worker1.HIERARCHY_LEVEL());
+console.log(worker2.salary);
+worker2.salary = 4999;
+console.log(worker2.salary);
 
-// console.log(worker2.setHierarchyLevel(0.2));
+console.log(worker2.setHierarchyLevel(2));
