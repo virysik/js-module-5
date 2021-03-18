@@ -55,9 +55,9 @@ const worker1 = new TopLevelWorker(
   HIERARCHY_LEVEL.BOTTOM
 );
 
-console.log(worker1.getSalary());
+// console.log(worker1.getSalary());
 
- console.log(worker1);
+// console.log(worker1);
 
 const LOYALTY_LEVEL = {
   HIGH: "high",
@@ -81,7 +81,7 @@ const worker11 = new BottomLevelWorker(["Ivan",
   36,
   "Developer",
   1220], 10);
-console.log(worker11);
+// console.log(worker11);
 // console.log(worker11.getLoyaltyLevel());
 
 
@@ -103,6 +103,11 @@ class Worker1 {
     this.#salary = salary;
   }
 
+  static HIERARCHY_LEVEL() {
+  return { TOP: "top",
+    BOTTOM: 'bottom'}
+  };
+
   get salary() {
     if (this.#salary >= 500 && this.#salary < 5000) {
       return this.#salary;
@@ -114,13 +119,9 @@ class Worker1 {
   set salary(value) {
     if (value >= 500 && value < 5000) {
       this.#salary = value;
-    }
+    } 
+    console.error(`Error in salary definition`);
   }
-
-  static HIERARCHY_LEVEL() {
-  return { TOP: "top",
-    BOTTOM: 'bottom'}
-  };
  
 }
 
@@ -138,6 +139,16 @@ class TopLevelWorker1 extends Worker1 {
     if (years > 1 && years < 3) {
       this.hierarchyLevel = HIERARCHY_LEVEL.BOTTOM;
     }
+
+    if (years >= 3) {
+      this.hierarchyLevel = HIERARCHY_LEVEL.TOP;
+    }
+  }
+}
+
+class BottomLevelWorker1 extends TopLevelWorker1 {
+  constructor(name, surname, age, position, salary, hierarchyLevel) {
+    super(name, surname, age, position, salary, hierarchyLevel);
   }
 }
 
@@ -150,10 +161,23 @@ const worker2 = new TopLevelWorker1(
   HIERARCHY_LEVEL.BOTTOM
 );
 
+// console.log(worker2);
+// console.log(worker2.setHierarchyLevel(0.2));
 //  console.log(worker2.getSalary());
- console.log(Worker1.HIERARCHY_LEVEL());
-console.log(worker2.salary);
-worker2.salary = 4999;
-console.log(worker2.salary);
+//  console.log(Worker1.HIERARCHY_LEVEL());
+// console.log(worker2.salary);
+//  worker2.salary = 7999;
+//  console.log(worker2.salary);
 
-console.log(worker2.setHierarchyLevel(2));
+// console.log(worker2.setHierarchyLevel(2));
+
+const worker3 = new BottomLevelWorker1("Poly",
+  "Andersson",
+  30,
+  "Developer",
+  540,
+  HIERARCHY_LEVEL.BOTTOM);
+
+// console.log(worker3);
+// console.log(worker3.setHierarchyLevel(7));
+
